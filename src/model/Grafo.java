@@ -16,6 +16,7 @@ import java.util.List;
 public class Grafo {
 
     private String id, edgedefault;
+    private List<Vertice> listaVertice = new ArrayList<Vertice>();
     private List<Aresta> listaAresta = new ArrayList<Aresta>();
 
     public Grafo() {
@@ -37,6 +38,14 @@ public class Grafo {
         this.edgedefault = edgedefault;
     }
 
+    public List<Vertice> getListaVertice() {
+        return listaVertice;
+    }
+
+    public void setListaVertice(List<Vertice> listaVertice) {
+        this.listaVertice = listaVertice;
+    }
+
     public List<Aresta> getListaAresta() {
         return listaAresta;
     }
@@ -48,5 +57,4 @@ public class Grafo {
     public void addAresta(Aresta aresta) {
         this.listaAresta.add(aresta);
     }
-
 }
