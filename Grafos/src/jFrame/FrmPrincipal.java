@@ -1,7 +1,7 @@
 package jFrame;
 
-import grafos.Grafos;
-import grafos.Vertice;
+import model.Grafos;
+import model.Vertice;
 import java.util.List;
 import javax.swing.JOptionPane;
 

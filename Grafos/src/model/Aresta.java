@@ -1,35 +1,33 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model;
 
 public class Aresta {
-    Vertice vertice;
-    Vertice vertice1; 
-    String id, source, target;
+    Vertice node1;
+    Vertice node2; 
+    String id;
+    private String source;
+    private String target;
+    private int peso;
 
     public Aresta() {
     }
 
-    // retorna o vertice 
-    public Vertice getVertice() {
-        return vertice;
-    }
-    // 
-    public void setVertice(Vertice vertice) {
-        this.vertice = vertice;
-        this.source = vertice.getId();
+    
+    public Vertice getNode1() {
+        return node1;
     }
 
-    public Vertice getVertice1() {
-        return vertice1;
+    public void setNode1(Vertice node1) {
+        this.node1 = node1;
+        this.source=node1.getId();
     }
 
-    public void setVertice1(Vertice vertice1) {
-        this.vertice1 = vertice1;
-        this.target = vertice1.getId();
+    public Vertice getNode2() {
+        return node2;
+    }
+
+    public void setNode2(Vertice node2) {
+        this.node2 = node2;
+        this.target=node2.getId();
     }
 
     public String getId() {
@@ -38,6 +36,30 @@ public class Aresta {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
+    }
+
+    public String getTarget() {
+        return target;
+    }
+
+    public void setTarget(String target) {
+        this.target = target;
+    }
+
+    public int getPeso() {
+        return peso;
+    }
+
+    public void setPeso(int peso) {
+        this.peso = peso;
     }
     
 }
