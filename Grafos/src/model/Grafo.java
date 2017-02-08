@@ -15,7 +15,7 @@ import model.Vertice;
 public class Grafo {
     private String nomeGrafo,tipoGrafo,lista;
     public List<Aresta> arestas = new ArrayList<Aresta>();
-
+    public List<Vertice> vertices = new ArrayList<Vertice>();
     public String getNomeGrafo() {
         return nomeGrafo;
     }
@@ -35,7 +35,49 @@ public class Grafo {
     public List<Aresta> getListaArestas() {
         return arestas;
     }
-    
+    public void setListaAresta(List<Aresta> aresta) {
+        this.arestas = aresta;
+    }
+    public List<Vertice> getListaVertices() {
+        return vertices;
+    }
+
+    public void setListaVertices(List<Vertice> vertice) {
+        this.vertices = vertice;
+    }
+     public void addVertice(Vertice vertice){
+        this.vertices.add(vertice);
+    }
+    public String removerVertice(String vertice){
+        for(int i = 0; i < vertices.size();i++){
+            if(vertices.get(i).id.equals(vertice)){
+                vertices.remove(i);
+                for(int a = 0; a < arestas.size();a++){
+                    if(arestas.get(a).getNode1().getId().equals(vertice)){
+                        arestas.remove(a);
+                        
+                    }
+                }
+                for(int a2 = 0; a2 < arestas.size();a2++){
+                    if(arestas.get(a2).getNode2().getId().equals(vertice)){
+                        arestas.remove(a2);
+                        
+                    }
+                }
+                return "Vertice "+ vertice+" removido com sucesso";
+            }
+        }
+        return "removido";
+    }
+   public String EditarVertice(Grafo grafo,String vertice, String novo){
+        for(int i = 0; i < grafo.getListaVertices().size();i++){
+            if(grafo.getListaVertices().get(i).getId().equals(vertice)){
+                grafo.getListaVertices().get(i).setId(novo);
+                return "Vertice "+ vertice+" alterado com sucesso!\n" + vertice+"  --------->  "+novo;
+            }
+        }
+        return "Erro! não foi possivel alterar";
+    }
     public void addAresta(Aresta aresta) {
         this.arestas.add(aresta);
     }
@@ -124,6 +166,49 @@ public class Grafo {
             }
         }
         return incidencia;
+    }
+    public String listaAdjacencia(Grafo grafo) {
+        String lista = "";
+         int size = grafo.getListaVertices().size(), i, j;
+        int matriz[][] = new int[size][size];
+        for (Aresta aresta : grafo.getListaArestas()) {
+            int no1 = grafo.getListaVertices().indexOf(aresta.getNode1());
+            int no2 = grafo.getListaVertices().indexOf(aresta.getNode2());
+            matriz[no1][no2] = 1;
+             matriz[no2][no1] = 1;
+        }
+        for (i = 0; i < size; i++) {
+            lista += "\n" + grafo.getListaVertices().get(i).getId();
+            for (j = 0; j < size; j++) {
+                if (matriz[i][j] == 1) {
+                    lista += " ->" + grafo.getListaVertices().get(j).getId();
+                }
+            }
+        }
+      return lista;  
+    
+    }
+    public String matrizAdjacencia(Grafo grafo) {
+        String espaco = " ";
+        int size = grafo.getListaVertices().size(), i, j;
+        int matriz[][] = new int[size][size];
+        String matrizTotal = "";
+        for (Aresta aresta : grafo.getListaArestas()) {
+            int no1 = grafo.getListaVertices().indexOf(aresta.getNode1());
+            int no2 = grafo.getListaVertices().indexOf(aresta.getNode2());
+            matriz[no1][no2] = 1;
+            matriz[no2][no1] = 1;
+        }
+        for (int a = 0; a < size; a++) {
+            matrizTotal += espaco + grafo.getListaVertices().get(a).getId();
+        }
+        for (i = 0; i < size; i++) {
+            matrizTotal += "\n" + grafo.getListaVertices().get(i).getId();
+            for (j = 0; j < size; j++) {
+                matrizTotal += espaco + matriz[i][j];
+            }
+        }
+        return (matrizTotal);
     }
     public String geraGrafico(Grafo graph){
         String lista = "digraph G {";
