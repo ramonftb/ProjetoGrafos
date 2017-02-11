@@ -210,25 +210,20 @@ public class Grafo {
         }
         return (matrizTotal);
     }
-    public String geraGrafico(Grafo graph){
-        String lista = "digraph G {";
-        int size = graph.getListaVertices().size(), i, j;
-        int matriz[][] = new int[size][size];
-        for (Aresta aresta : graph.getListaArestas()) {
-            int no1 = graph.getListaVertices().indexOf(aresta.getNode1());
-            int no2 = graph.getListaVertices().indexOf(aresta.getNode2());
-            matriz[no1][no2] = 1;           
+    public String geraGrafico(Grafo grafo){
+        int a,v;
+        String lista = "digraph G {\n";
+        for (a = 0; a < grafo.getListaArestas().size();a++) {
+            lista +=  grafo.getListaArestas().get(a).getSource() + " -> " +  grafo.getListaArestas().get(a).getTarget() + "[label=" +  grafo.getListaArestas().get(a).getPeso() + "];\n";
+
         }
-        for (i = 0; i < size; i++) {
-            lista += "\n" + graph.getListaVertices().get(i).getId();
-            for (j = 0; j < size; j++) {
-                if (matriz[i][j] == 1) {
-                    lista += " ->" + graph.getListaVertices().get(j).getId();
-                }
+        if(grafo.getListaArestas().size() > 0){
+            for (v = a; v < grafo.getListaVertices().size();v++) {
+            lista += grafo.getListaVertices().get(v).getId()+";\n";
+
             }
-            lista+=";";
         }
-        lista+="\n}";
+        lista += "}";
       return lista;  
     }
      public String conjunto(Grafo grafo) {
